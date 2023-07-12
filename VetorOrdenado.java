@@ -10,9 +10,6 @@ public class VetorOrdenado {
         totalVeiculos = 0;
     }
 
-
-
-    
     public int tamanho(){
         return this.totalVeiculos;
     }
@@ -124,5 +121,6 @@ public class VetorOrdenado {
         return tempo_atual / 1000.0;
     }
 
+    
 
 }
