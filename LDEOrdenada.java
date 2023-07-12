@@ -10,6 +10,8 @@ public class LDEOrdenada implements IMap{
         fim = null;
     }
 
+
+
     public void adicionar(Veiculo veiculo) {
         long startTime = System.nanoTime();
         NohLDE novo = new NohLDE(veiculo);
@@ -26,12 +28,17 @@ public class LDEOrdenada implements IMap{
         tempo_atual = endTime - startTime;
     }
 
+
+
     public boolean vazio(){
         if(inicio == null){
             return true;
         }
         return false;
     }
+
+
+
 
     public boolean remove(int chassi) {
         NohLDE aux = inicio;
@@ -59,6 +66,9 @@ public class LDEOrdenada implements IMap{
         return true;
     }
 
+
+
+
     public int tamanho(){
         int cont = 0;
         NohLDE aux = inicio;
@@ -73,9 +83,13 @@ public class LDEOrdenada implements IMap{
     }
 
     
+
+
     public double getTempoAtual() {
         return tempo_atual / 1000.0;
     }
+
+
 
 
 
@@ -100,19 +114,21 @@ public class LDEOrdenada implements IMap{
 
 
 
+    public void mostrarVeiculos() {
+        // Ordena os veículos pelo número de chassi em ordem crescente
+        long startTime = System.nanoTime();
+        NohLDE aux = inicio;
 
+        while (aux != null) {
+            System.out.println(aux.getConteudo().toString());
+            aux = aux.getProximo();
 
-//não tá ordenando direito
-public void mostrarVeiculosOrdenados() {
-    // Ordena os veículos pelo número de chassi em ordem crescente
-
-    NohLDE aux = inicio;
-
-    while (aux != null) {
-        System.out.println(aux.getConteudo().toString());
-        aux = aux.getProximo();
+        }
+        long endTime = System.nanoTime();
+        tempo_atual = endTime - startTime;
     }
-}
+
+
     public void bubbleSort() {
     boolean trocou;
     NohLDE atual;
@@ -138,9 +154,13 @@ public void mostrarVeiculosOrdenados() {
             }
 
             atual = atual.getProximo();
+            
         }
     } while (trocou);
 }
+
+
+
 
 
     @Override

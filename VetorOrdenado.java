@@ -121,6 +121,24 @@ public class VetorOrdenado {
         return tempo_atual / 1000.0;
     }
 
+public int contarVeiculosMarcaFord() {
+    long startTime = System.nanoTime();
+
+    int contador = 0;
+    for (int i = 0; i < tamanho(); i++) {
+        if (veiculos[i].isMarcaFord()) {
+            contador++;
+        }
+    }
+
+    long endTime = System.nanoTime();
+    tempo_atual = endTime - startTime;
+
+    return contador;
+}
+
+
+
     
 
 }

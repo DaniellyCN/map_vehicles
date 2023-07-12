@@ -1,6 +1,7 @@
 public class ABB {
     
     private NohArvore raiz;
+    private long tempo_atual;
 
     public ABB(){
         raiz = null;
@@ -91,5 +92,33 @@ public class ABB {
         }
         return false;
     }
+
+    public double getTempoAtual() {
+        return tempo_atual / 1000.0;
+    }
+
+    
+    public int contarVeiculosMarcaFord() {
+    long startTime = System.nanoTime();
+
+    int contador = 0;
+    contarVeiculosMarcaFordRecursivo(raiz, contador);
+
+    long endTime = System.nanoTime();
+    tempo_atual = endTime - startTime;
+
+    return contador;
+}
+
+private void contarVeiculosMarcaFordRecursivo(NohArvore noh, int contador) {
+    if (noh != null) {
+        if (noh.getConteudo().isMarcaFord()) {
+            contador++;
+        }
+        contarVeiculosMarcaFordRecursivo(noh.getEsquerda(), contador);
+        contarVeiculosMarcaFordRecursivo(noh.getDireita(), contador);
+    }
+}
+
     
 }
