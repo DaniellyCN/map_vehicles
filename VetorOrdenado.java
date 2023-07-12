@@ -74,18 +74,48 @@ public class VetorOrdenado {
     public void adicionar(Veiculo novo) {
         if(cheio()){
             assegurarEspaco();
-        }
-        int count;
-        for(count = tamanho() - 1; count >= 0; count--) {
-            if(veiculos[count].getChassi() > novo.getChassi()) {
-                veiculos[count + 1] = veiculos[count]; // desloca veiculo atual para a direita
-            }
+        }else {
+            veiculos[totalVeiculos] = novo;
+            totalVeiculos ++;
         }
 
-        veiculos[count + 1] = novo;
-        totalVeiculos ++;
     }
 
+    public void bubble_sort() {
+        long startTime = System.nanoTime(); 
+    
+        for (int i = 0; i < tamanho(); i++) {
+            for (int j = 0; j < tamanho() - 1; j++) {
+                if (veiculos[j].getChassi() > veiculos[j + 1].getChassi()) {
+                    Veiculo auxiliar = veiculos[j];
+                    veiculos[j] = veiculos[j + 1];
+                    veiculos[j + 1] = auxiliar;
+                }
+            }
+        }
+        long endTime = System.nanoTime(); 
+        tempo_atual = endTime - startTime; 
+    }
+    
+    public void selection_sort() {
+        long startTime = System.nanoTime();
+    
+        for (int i = 0; i < tamanho() - 1; i++) {
+            int menorIndice = i;
+            for (int j = i + 1; j < tamanho(); j++) {
+                if (veiculos[j].getChassi() < veiculos[menorIndice].getChassi()) {
+                    menorIndice = j;
+                }
+            }
+    
+            Veiculo temp = veiculos[i];
+            veiculos[i] = veiculos[menorIndice];
+            veiculos[menorIndice] = temp;
+        }
+    
+        long endTime = System.nanoTime();
+        tempo_atual = endTime - startTime;
+    }    
 
     public double getTempoAtual() {
         return tempo_atual / 1000.0;
