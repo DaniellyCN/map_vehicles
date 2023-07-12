@@ -22,13 +22,13 @@ public class Main {
         abb.imprimirEmOrdem();
 
         double tempoSegundos = abb.getTempoAtual();
-        System.out.println("Tempo de execução para ordenar : " + tempoSegundos + " segundos");
+        System.out.println("Tempo de execução para ordenar : " + tempoSegundos + " nanosegundos");
 
         int quantidadeFordd = abb.contarVeiculosMarcaFord();
         System.out.println("Quantidade de veículos da marca Ford: " + quantidadeFordd);
 
         double tempoContagemFordd = abb.getTempoAtual();
-        System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFordd);
+        System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFordd + " nanosegundos");
 
         System.out.println("================================ Vetor ================================");
 
@@ -52,12 +52,12 @@ public class Main {
         // Ordenar o vetor usando bubble sort
         vetorOrdenado.bubble_sort();
         System.out.println("Vetor ordenado usando bubble sort. Tempo de execucao: " + vetorOrdenado.getTempoAtual()
-                + " microssegundos");
+                + " nanosegundos");
 
         // Ordenar o vetor usando selection sort
         vetorOrdenado.selection_sort();
         System.out.println("Vetor ordenado usando selection sort. Tempo de execucao: " + vetorOrdenado.getTempoAtual()
-                + " microssegundos");
+                + " nanosegundos");
 
         System.out.println(
                 "================================ Lista Duplamente Encadeada ================================");
@@ -74,16 +74,16 @@ public class Main {
 
         lista.bubble_sort();
         System.out.println("Depois da ordenação:");
-        System.out.println("Tempo gasto para ordenar a lista: " + lista.getTempoAtual() + " microssegundos");
+        System.out.println("Tempo gasto para ordenar a lista: " + lista.getTempoAtual() + " nanosegundos");
 
         lista.imprimeLista();
         double tempoImpressao = lista.getTempoAtual();
-        System.out.println("Tempo para imprimir todos os veículos: " + tempoImpressao);
+        System.out.println("Tempo para imprimir todos os veículos: " + tempoImpressao + " nanosegundos");
 
         int quantidadeFord = lista.contarVeiculosMarcaFord();
         System.out.println("Quantidade de veículos da marca Ford: " + quantidadeFord);
         double tempoContagemFord = lista.getTempoAtual();
-        System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFord);
+        System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFord + " nanosegundos");
 
     }
 }

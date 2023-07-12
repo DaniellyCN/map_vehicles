@@ -94,7 +94,7 @@ public class ABB {
     }
 
     public double getTempoAtual() {
-        return tempo_atual / 1000.0;
+        return tempo_atual;
     }
 
     
