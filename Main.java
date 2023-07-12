@@ -38,9 +38,8 @@ public class Main {
             Veiculo veiculo = new Veiculo();
             vetorOrdenado.adicionar(veiculo);
         }
-
-
         vetorOrdenado.imprimeVetor();
+
         System.out.println("Tempo gasto para inserir 10 veículos: " + abb.getTempoAtual() + " nanosegundos");
 
         int quantidadeFord2 = abb.contarVeiculosMarcaFord();
