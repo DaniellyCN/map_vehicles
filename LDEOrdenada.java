@@ -1,5 +1,5 @@
 // Lista Duplamente encadeada
-public class LDEOrdenada {
+public class LDEOrdenada implements IMap{
     
     private NohLDE inicio;
     private NohLDE fim;
@@ -11,6 +11,7 @@ public class LDEOrdenada {
     }
 
     public void adicionar(Veiculo veiculo) {
+        long startTime = System.nanoTime();
         NohLDE novo = new NohLDE(veiculo);
         if(fim==null){
             inicio = novo;
@@ -20,6 +21,9 @@ public class LDEOrdenada {
             novo.setAnterior(fim);
             fim = novo;
         }
+
+        long endTime = System.nanoTime();
+        tempo_atual = endTime - startTime;
     }
 
     public boolean vazio(){
@@ -71,6 +75,180 @@ public class LDEOrdenada {
     
     public double getTempoAtual() {
         return tempo_atual / 1000.0;
+    }
+
+
+
+    public int contarVeiculosMarcaFord() {
+    long startTime = System.nanoTime();
+
+    int contador = 0;
+    NohLDE aux = inicio;
+
+    while (aux != null) {
+        if (aux.getConteudo().isMarcaFord()) {
+            contador++;
+        }
+        aux = aux.getProximo();
+    }
+
+    long endTime = System.nanoTime();
+    tempo_atual = endTime - startTime;
+
+    return contador;
+}
+
+
+
+
+
+//não tá ordenando direito
+public void mostrarVeiculosOrdenados() {
+    // Ordena os veículos pelo número de chassi em ordem crescente
+
+    NohLDE aux = inicio;
+
+    while (aux != null) {
+        System.out.println(aux.getConteudo().toString());
+        aux = aux.getProximo();
+    }
+}
+
+    public void bubbleSort() {
+    long startTime = System.nanoTime();
+
+    boolean trocado;
+    NohLDE atual;
+    NohLDE anterior = null;
+
+    do {
+        trocado = false;
+        atual = inicio;
+
+        while (atual != null && atual.getProximo() != anterior) {
+            // Verifica se é necessário trocar o atual com o próximo nó
+            if (atual.getConteudo().getChassi() > atual.getProximo().getConteudo().getChassi()) {
+                trocarNohs(atual, atual.getProximo());
+                trocado = true;
+            }
+
+            atual = atual.getProximo();
+        }
+
+        anterior = atual; // O último nó comparado na iteração anterior é o novo 'anterior'
+    } while (trocado);
+
+    long endTime = System.nanoTime();
+    tempo_atual = endTime - startTime;
+}
+
+    private void trocarNohs(NohLDE a, NohLDE b) {
+    // Troca os nós a e b na lista
+
+    // Atualiza os nós adjacentes a 'a'
+    if (a.getAnterior() != null) {
+        a.getAnterior().setProximo(b);
+    } else {
+        inicio = b; // 'a' era o nó de início da lista, agora 'b' será
+    }
+    b.setAnterior(a.getAnterior());
+
+    // Atualiza os nós adjacentes a 'b'
+    if (b.getProximo() != null) {
+        b.getProximo().setAnterior(a);
+    } else {
+        fim = a; // 'b' era o nó final da lista, agora 'a' será
+    }
+    a.setProximo(b.getProximo());
+
+    // Realiza a troca dos nós 'a' e 'b'
+    a.setAnterior(b);
+    b.setProximo(a);
+}
+
+
+
+    @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
+
+    @Override
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+    }
+
+    @Override
+    public boolean containsKey(int chassi) throws Exception {
+       NohLDE aux = inicio;
+        while (aux != null) {
+            if (aux.getConteudo().getChassi() == chassi) {
+                return true;
+            }
+            aux = aux.getProximo();
+        }
+        return false
+        ;
+    }
+
+    @Override
+    public boolean containsValue(Veiculo veiculo) throws Exception {
+        NohLDE aux = inicio;
+        while (aux != null) {
+            if (aux.getConteudo().equals(veiculo)) {
+                return true;
+            }
+            aux = aux.getProximo();
+        }
+        return false;
+    }
+
+    @Override
+    public Veiculo getVeiculo(int chassi) throws Exception {
+      NohLDE aux = inicio;
+        while (aux != null) {
+            if (aux.getConteudo().getChassi() == chassi) {
+                return aux.getConteudo();
+            }
+            aux = aux.getProximo();
+        }
+        throw new Exception("Veículo não encontrado pelo código do chassi informado.");
+    }
+
+    @Override
+    public Veiculo putVeiculo(int chassi, Veiculo veiculo) throws Exception {
+      if (containsKey(chassi)) {
+            throw new Exception("Já existe um veículo com o mesmo código de chassi.");
+        }
+
+        adicionar(veiculo);
+        return veiculo;
+    }
+
+    @Override
+    public void putAllVeiculos() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'putAllVeiculos'");
+    }
+
+    @Override
+    public void clear() {
+       inicio = null;
+        fim = null;
+    }
+
+    @Override
+    public boolean equals() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'equals'");
+    }
+
+    @Override
+    public int codeHash() throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'codeHash'");
     }
 
 }

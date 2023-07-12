@@ -14,5 +14,7 @@ public class NohLDE {
     public void setProximo(NohLDE n) { this.proximo = n; }
     public NohLDE getAnterior() {return anterior;}
     public void setAnterior(NohLDE n) { this.anterior = n; }
+    public void setConteudo(Veiculo conteudo) {
+    }
 
 }
