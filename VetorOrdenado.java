@@ -136,9 +136,13 @@ public int contarVeiculosMarcaFord() {
 
     return contador;
 }
+public void imprimeVetor() {
+    System.out.println("Vetor atual:");
+    for (int i = 0; i < tamanho(); i++) {
+        System.out.println(" - Veiculo chassi: " + veiculos[i].getChassi() + " marca: " + veiculos[i].getMarca());
+    }
+}
 
-
-
-    
+ 
 
 }

@@ -1,6 +1,6 @@
 // Lista Duplamente encadeada
-public class LDEOrdenada implements IMap{
-    
+public class LDEOrdenada implements IMap {
+
     private NohLDE inicio;
     private NohLDE fim;
     private long tempo_atual;
@@ -10,15 +10,13 @@ public class LDEOrdenada implements IMap{
         fim = null;
     }
 
-
-
     public void adicionar(Veiculo veiculo) {
         long startTime = System.nanoTime();
         NohLDE novo = new NohLDE(veiculo);
-        if(fim==null){
+        if (fim == null) {
             inicio = novo;
             fim = novo;
-        }else{
+        } else {
             fim.setProximo(novo);
             novo.setAnterior(fim);
             fim = novo;
@@ -28,136 +26,158 @@ public class LDEOrdenada implements IMap{
         tempo_atual = endTime - startTime;
     }
 
-
-
-    public boolean vazio(){
-        if(inicio == null){
+    public boolean vazio() {
+        if (inicio == null) {
             return true;
         }
         return false;
     }
 
-
-
-
     public boolean remove(int chassi) {
         NohLDE aux = inicio;
-        while(aux != null && aux.getConteudo().getChassi() != chassi){
+        while (aux != null && aux.getConteudo().getChassi() != chassi) {
             aux = aux.getProximo();
         }
-    
-        if(aux==null){
+
+        if (aux == null) {
             return false; // caso nao tenha achado o NohLDE que tenha a info desejada, content
         }
-        if(aux==inicio){
+        if (aux == inicio) {
             inicio = aux.getProximo();
-            if(inicio != null){ // havia pelo menos 2 NohLDEs na lista
-                inicio.setAnterior(null);// o primeiro da lista sempre aponta para o NohLDE anterior para null, já que nao tem
-            }else{
-                fim = null; // havia apenas 1 NohLDE na lista e por isso o novo inicio é null e portanto o fim também deve ser
+            if (inicio != null) { // havia pelo menos 2 NohLDEs na lista
+                inicio.setAnterior(null);// o primeiro da lista sempre aponta para o NohLDE anterior para null, já que
+                                         // nao tem
+            } else {
+                fim = null; // havia apenas 1 NohLDE na lista e por isso o novo inicio é null e portanto o
+                            // fim também deve ser
             }
-        }else if(aux == fim){
+        } else if (aux == fim) {
             aux.getAnterior().setProximo(null);
             fim = aux.getAnterior();
-        }else{
+        } else {
             aux.getProximo().setAnterior(aux.getAnterior());
             aux.getAnterior().setProximo(aux.getProximo());
         }
         return true;
     }
 
-
-
-
-    public int tamanho(){
+    public int tamanho() {
         int cont = 0;
         NohLDE aux = inicio;
-        if(inicio==null){
+        if (inicio == null) {
             return 0;
         }
-        while(aux!=null){
+        while (aux != null) {
             aux = aux.getProximo();
-            cont+=1;
+            cont += 1;
         }
         return cont;
     }
-
-    
-
 
     public double getTempoAtual() {
         return tempo_atual / 1000.0;
     }
 
-
-
-
-
     public int contarVeiculosMarcaFord() {
-    long startTime = System.nanoTime();
-
-    int contador = 0;
-    NohLDE aux = inicio;
-
-    while (aux != null) {
-        if (aux.getConteudo().isMarcaFord()) {
-            contador++;
-        }
-        aux = aux.getProximo();
-    }
-
-    long endTime = System.nanoTime();
-    tempo_atual = endTime - startTime;
-
-    return contador;
-}
-
-
-
-    public void mostrarVeiculos() {
-        // Ordena os veículos pelo número de chassi em ordem crescente
         long startTime = System.nanoTime();
+
+        int contador = 0;
         NohLDE aux = inicio;
 
         while (aux != null) {
-            System.out.println(aux.getConteudo().toString());
+            if (aux.getConteudo().isMarcaFord()) {
+                contador++;
+            }
             aux = aux.getProximo();
-
         }
+
         long endTime = System.nanoTime();
         tempo_atual = endTime - startTime;
+
+        return contador;
     }
 
+public void imprimeLista() {
+    NohLDE nohAtual = inicio;
+    System.out.println("Lista:");
+    while (nohAtual != null) {
+        System.out.println(" - " + nohAtual.getConteudo().toString()); // Ajuste aqui para acessar a informação desejada do veículo
+        nohAtual = nohAtual.getProximo();
+    }
+}
 
-    public void bubbleSort() {
+public void bubble_sort() {
+    if (inicio == null || inicio.getProximo() == null) {
+        return;
+    }
+
     boolean trocou;
     NohLDE atual;
     NohLDE proximo;
-
-    if (inicio == null || inicio.getProximo() == null) {
-        return; // Lista vazia ou com apenas um elemento, não é necessário ordenar
-    }
-
+ long startTime = System.nanoTime();
     do {
         trocou = false;
         atual = inicio;
 
-        while (atual.getProximo() != null) {
+        while (atual != null && atual.getProximo() != null) {
             proximo = atual.getProximo();
 
             if (atual.getConteudo().getChassi() > proximo.getConteudo().getChassi()) {
                 // Troca os nós
-                Veiculo temp = atual.getConteudo();
-                atual.setConteudo(proximo.getConteudo());
-                proximo.setConteudo(temp);
+                trocarNos(atual, proximo);
                 trocou = true;
             }
 
             atual = atual.getProximo();
-            
         }
     } while (trocou);
+
+    long endTime = System.nanoTime();
+    tempo_atual = endTime - startTime;
 }
+
+
+
+private void trocarNos(NohLDE noh1, NohLDE noh2) {
+    // Troca os nós adjacentes
+ if (noh1 == null || noh2 == null) {
+        return; // Verifica se algum dos nós é nulo
+    }
+
+    // Atualiza as referências do próximo
+    NohLDE proxNoh1 = noh1.getProximo();
+    NohLDE proxNoh2 = noh2.getProximo();
+
+    noh1.setProximo(proxNoh2);
+    noh2.setProximo(proxNoh1);
+
+    if (proxNoh1 != null) {
+        proxNoh1.setAnterior(noh2);
+    }
+    if (proxNoh2 != null) {
+        proxNoh2.setAnterior(noh1);
+    }
+
+    // Atualiza as referências do anterior
+    NohLDE antNoh1 = noh1.getAnterior();
+    NohLDE antNoh2 = noh2.getAnterior();
+
+    noh1.setAnterior(antNoh2);
+    noh2.setAnterior(antNoh1);
+
+    if (antNoh1 != null) {
+        antNoh1.setProximo(noh2);
+    } else {
+        inicio = noh2;
+    }
+    if (antNoh2 != null) {
+        antNoh2.setProximo(noh1);
+    } else {
+        inicio = noh1;
+    }
+}
+
+
 
 
 
@@ -177,15 +197,14 @@ public class LDEOrdenada implements IMap{
 
     @Override
     public boolean containsKey(int chassi) throws Exception {
-       NohLDE aux = inicio;
+        NohLDE aux = inicio;
         while (aux != null) {
             if (aux.getConteudo().getChassi() == chassi) {
                 return true;
             }
             aux = aux.getProximo();
         }
-        return false
-        ;
+        return false;
     }
 
     @Override
@@ -202,7 +221,7 @@ public class LDEOrdenada implements IMap{
 
     @Override
     public Veiculo getVeiculo(int chassi) throws Exception {
-      NohLDE aux = inicio;
+        NohLDE aux = inicio;
         while (aux != null) {
             if (aux.getConteudo().getChassi() == chassi) {
                 return aux.getConteudo();
@@ -214,7 +233,7 @@ public class LDEOrdenada implements IMap{
 
     @Override
     public Veiculo putVeiculo(int chassi, Veiculo veiculo) throws Exception {
-      if (containsKey(chassi)) {
+        if (containsKey(chassi)) {
             throw new Exception("Já existe um veículo com o mesmo código de chassi.");
         }
 
@@ -230,7 +249,7 @@ public class LDEOrdenada implements IMap{
 
     @Override
     public void clear() {
-       inicio = null;
+        inicio = null;
         fim = null;
     }
 

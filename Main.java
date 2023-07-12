@@ -1,10 +1,10 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        
-        
-         System.out.println("================================  TESTE COM ARVORE ================================");
-        
-        
+
+        System.out.println("================================  TESTE COM ARVORE ================================");
+
         // Criar uma instância de ABB
         ABB abb = new ABB();
 
@@ -25,8 +25,6 @@ public class Main {
         boolean contem = abb.contem(veiculo2.getChassi());
         System.out.println("Arvore contem o veiculo 2? " + contem);
 
-
-
         int quantidadeVeiculos3 = 10;
         for (int i = 0; i < quantidadeVeiculos3; i++) {
             Veiculo veiculo = new Veiculo();
@@ -41,12 +39,10 @@ public class Main {
         double tempoContagemFord3 = abb.getTempoAtual();
         System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFord3);
 
-
-
-
-System.out.println("================================  TESTE COM VETOR ================================");
+        System.out.println("================================  TESTE COM VETOR ================================");
         
-        VetorOrdenado vetorOrdenado = new VetorOrdenado(10);
+       
+  VetorOrdenado vetorOrdenado = new VetorOrdenado(10);
             int quantidadeVeiculos1 = 10;                           //ADICIONA VEICULOS COM CHASSI ALEATORIO
         for (int i = 0; i < quantidadeVeiculos1; i++) {
             Veiculo veiculo = new Veiculo();
@@ -95,33 +91,33 @@ System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoConta
 
        
          
-        
 
 
-        System.out.println("================================  TESTE COM LISTA DUPLAMENTE ENCADEADA ================================");
+        System.out.println(
+                "================================ Lista Duplamente Encadeada ================================");
         LDEOrdenada lista = new LDEOrdenada();
         int quantidadeVeiculos = 10;
-        for (int i = 0; i < quantidadeVeiculos; i++) {  // valores aleatorios com ramdon MUDAR PRA 100 MIL VEICULOS
+        for (int i = 0; i < quantidadeVeiculos; i++) {
             Veiculo veiculo = new Veiculo();
             lista.adicionar(veiculo);
         }
-
-       
         System.out.println("Tempo gasto para inserir 10 veículos: " + lista.getTempoAtual() + " nanosegundos");
 
+        System.out.println("Antes da ordenação:");
+        lista.imprimeLista();
 
-        //FALTA ORDENAR A LISTA
+        lista.bubble_sort();
+        System.out.println("Depois da ordenação:");
+        System.out.println("Tempo gasto para ordenar a lista: " + lista.getTempoAtual() + " microssegundos");
 
-        lista.mostrarVeiculos();
+        lista.imprimeLista();
         double tempoImpressao = lista.getTempoAtual();
         System.out.println("Tempo para imprimir todos os veículos: " + tempoImpressao);
-
 
         int quantidadeFord = lista.contarVeiculosMarcaFord();
         System.out.println("Quantidade de veículos da marca Ford: " + quantidadeFord);
         double tempoContagemFord = lista.getTempoAtual();
         System.out.println("Tempo para encontrar veículos da marca Ford: " + tempoContagemFord);
-                
-                
+
     }
 }
