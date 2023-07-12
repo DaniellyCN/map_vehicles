@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         // Criar uma instância de ABB
-        ABB abb = new ABB();
+        /*ABB abb = new ABB();
 
         // Adicionar veículos à árvore
         Veiculo veiculo1 = new Veiculo();
@@ -51,15 +51,15 @@ public class Main {
         // Ordenar o vetor usando selection sort
         vetorOrdenado.selection_sort();
         System.out.println("Vetor ordenado usando selection sort. Tempo de execucao: " + vetorOrdenado.getTempoAtual() + " microssegundos");
+*/
 
 
 
 
-
-        /*TESTE COM LDE
-         * 
-         * 
-         *  LDEOrdenada lista = new LDEOrdenada();
+        
+        
+         
+          LDEOrdenada lista = new LDEOrdenada();
         
        
         int quantidadeVeiculos = 10;
@@ -79,7 +79,7 @@ public class Main {
 
         double tempoContagemFord = lista.getTempoAtual();
         System.out.println("tempo para encontrar veículos da marca Ford: " + tempoContagemFord);
-         * 
-         */
+         
+         
     }
 }

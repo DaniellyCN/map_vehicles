@@ -113,59 +113,34 @@ public void mostrarVeiculosOrdenados() {
         aux = aux.getProximo();
     }
 }
-
     public void bubbleSort() {
-    long startTime = System.nanoTime();
-
-    boolean trocado;
+    boolean trocou;
     NohLDE atual;
-    NohLDE anterior = null;
+    NohLDE proximo;
+
+    if (inicio == null || inicio.getProximo() == null) {
+        return; // Lista vazia ou com apenas um elemento, não é necessário ordenar
+    }
 
     do {
-        trocado = false;
+        trocou = false;
         atual = inicio;
 
-        while (atual != null && atual.getProximo() != anterior) {
-            // Verifica se é necessário trocar o atual com o próximo nó
-            if (atual.getConteudo().getChassi() > atual.getProximo().getConteudo().getChassi()) {
-                trocarNohs(atual, atual.getProximo());
-                trocado = true;
+        while (atual.getProximo() != null) {
+            proximo = atual.getProximo();
+
+            if (atual.getConteudo().getChassi() > proximo.getConteudo().getChassi()) {
+                // Troca os nós
+                Veiculo temp = atual.getConteudo();
+                atual.setConteudo(proximo.getConteudo());
+                proximo.setConteudo(temp);
+                trocou = true;
             }
 
             atual = atual.getProximo();
         }
-
-        anterior = atual; // O último nó comparado na iteração anterior é o novo 'anterior'
-    } while (trocado);
-
-    long endTime = System.nanoTime();
-    tempo_atual = endTime - startTime;
+    } while (trocou);
 }
-
-    private void trocarNohs(NohLDE a, NohLDE b) {
-    // Troca os nós a e b na lista
-
-    // Atualiza os nós adjacentes a 'a'
-    if (a.getAnterior() != null) {
-        a.getAnterior().setProximo(b);
-    } else {
-        inicio = b; // 'a' era o nó de início da lista, agora 'b' será
-    }
-    b.setAnterior(a.getAnterior());
-
-    // Atualiza os nós adjacentes a 'b'
-    if (b.getProximo() != null) {
-        b.getProximo().setAnterior(a);
-    } else {
-        fim = a; // 'b' era o nó final da lista, agora 'a' será
-    }
-    a.setProximo(b.getProximo());
-
-    // Realiza a troca dos nós 'a' e 'b'
-    a.setAnterior(b);
-    b.setProximo(a);
-}
-
 
 
     @Override
