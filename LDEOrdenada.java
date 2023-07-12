@@ -97,91 +97,84 @@ public class LDEOrdenada implements IMap {
         return contador;
     }
 
-public void imprimeLista() {
-    NohLDE nohAtual = inicio;
-    System.out.println("Lista:");
-    while (nohAtual != null) {
-        System.out.println(" - " + nohAtual.getConteudo().toString()); // Ajuste aqui para acessar a informação desejada do veículo
-        nohAtual = nohAtual.getProximo();
-    }
-}
-
-public void bubble_sort() {
-    if (inicio == null || inicio.getProximo() == null) {
-        return;
-    }
-
-    boolean trocou;
-    NohLDE atual;
-    NohLDE proximo;
- long startTime = System.nanoTime();
-    do {
-        trocou = false;
-        atual = inicio;
-
-        while (atual != null && atual.getProximo() != null) {
-            proximo = atual.getProximo();
-
-            if (atual.getConteudo().getChassi() > proximo.getConteudo().getChassi()) {
-                // Troca os nós
-                trocarNos(atual, proximo);
-                trocou = true;
-            }
-
-            atual = atual.getProximo();
+    public void imprimeLista() {
+        NohLDE nohAtual = inicio;
+        System.out.println("Lista:");
+        while (nohAtual != null) {
+            System.out.println(" - " + nohAtual.getConteudo().toString()); // Ajuste aqui para acessar a informação
+                                                                           // desejada do veículo
+            nohAtual = nohAtual.getProximo();
         }
-    } while (trocou);
-
-    long endTime = System.nanoTime();
-    tempo_atual = endTime - startTime;
-}
-
-
-
-private void trocarNos(NohLDE noh1, NohLDE noh2) {
-    // Troca os nós adjacentes
- if (noh1 == null || noh2 == null) {
-        return; // Verifica se algum dos nós é nulo
     }
 
-    // Atualiza as referências do próximo
-    NohLDE proxNoh1 = noh1.getProximo();
-    NohLDE proxNoh2 = noh2.getProximo();
+    public void bubble_sort() {
+        if (inicio == null || inicio.getProximo() == null) {
+            return;
+        }
 
-    noh1.setProximo(proxNoh2);
-    noh2.setProximo(proxNoh1);
+        boolean trocou;
+        NohLDE atual;
+        NohLDE proximo;
+        long startTime = System.nanoTime();
+        do {
+            trocou = false;
+            atual = inicio;
 
-    if (proxNoh1 != null) {
-        proxNoh1.setAnterior(noh2);
+            while (atual != null && atual.getProximo() != null) {
+                proximo = atual.getProximo();
+
+                if (atual.getConteudo().getChassi() > proximo.getConteudo().getChassi()) {
+                    // Troca os nós
+                    trocarNos(atual, proximo);
+                    trocou = true;
+                }
+
+                atual = atual.getProximo();
+            }
+        } while (trocou);
+
+        long endTime = System.nanoTime();
+        tempo_atual = endTime - startTime;
     }
-    if (proxNoh2 != null) {
-        proxNoh2.setAnterior(noh1);
+
+    private void trocarNos(NohLDE noh1, NohLDE noh2) {
+        // Troca os nós adjacentes
+        if (noh1 == null || noh2 == null) {
+            return; // Verifica se algum dos nós é nulo
+        }
+
+        // Atualiza as referências do próximo
+        NohLDE proxNoh1 = noh1.getProximo();
+        NohLDE proxNoh2 = noh2.getProximo();
+
+        noh1.setProximo(proxNoh2);
+        noh2.setProximo(proxNoh1);
+
+        if (proxNoh1 != null) {
+            proxNoh1.setAnterior(noh2);
+        }
+        if (proxNoh2 != null) {
+            proxNoh2.setAnterior(noh1);
+        }
+
+        // Atualiza as referências do anterior
+        NohLDE antNoh1 = noh1.getAnterior();
+        NohLDE antNoh2 = noh2.getAnterior();
+
+        noh1.setAnterior(antNoh2);
+        noh2.setAnterior(antNoh1);
+
+        if (antNoh1 != null) {
+            antNoh1.setProximo(noh2);
+        } else {
+            inicio = noh2;
+        }
+        if (antNoh2 != null) {
+            antNoh2.setProximo(noh1);
+        } else {
+            inicio = noh1;
+        }
     }
-
-    // Atualiza as referências do anterior
-    NohLDE antNoh1 = noh1.getAnterior();
-    NohLDE antNoh2 = noh2.getAnterior();
-
-    noh1.setAnterior(antNoh2);
-    noh2.setAnterior(antNoh1);
-
-    if (antNoh1 != null) {
-        antNoh1.setProximo(noh2);
-    } else {
-        inicio = noh2;
-    }
-    if (antNoh2 != null) {
-        antNoh2.setProximo(noh1);
-    } else {
-        inicio = noh1;
-    }
-}
-
-
-
-
-
-
 
     @Override
     public int size() {

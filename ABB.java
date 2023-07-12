@@ -98,11 +98,28 @@ public class ABB {
     }
 
     
-    public int contarVeiculosMarcaFord() {
-    long startTime = System.nanoTime();
+
+
+    private int contarVeiculosMarcaFordRecursivo(NohArvore noh) {
+    if (noh == null) {
+        return 0;
+    }
 
     int contador = 0;
-    contarVeiculosMarcaFordRecursivo(raiz, contador);
+    if (noh.getConteudo().isMarcaFord()) {
+        contador++;
+    }
+
+    contador += contarVeiculosMarcaFordRecursivo(noh.getEsquerda());
+    contador += contarVeiculosMarcaFordRecursivo(noh.getDireita());
+
+    return contador;
+}
+
+public int contarVeiculosMarcaFord() {
+    long startTime = System.nanoTime();
+
+    int contador = contarVeiculosMarcaFordRecursivo(raiz);
 
     long endTime = System.nanoTime();
     tempo_atual = endTime - startTime;
@@ -110,15 +127,36 @@ public class ABB {
     return contador;
 }
 
-private void contarVeiculosMarcaFordRecursivo(NohArvore noh, int contador) {
-    if (noh != null) {
-        if (noh.getConteudo().isMarcaFord()) {
-            contador++;
-        }
-        contarVeiculosMarcaFordRecursivo(noh.getEsquerda(), contador);
-        contarVeiculosMarcaFordRecursivo(noh.getDireita(), contador);
-    }
-}
 
+
+public void imprimirArvore() {
+        imprimirArvoreRecursivo(raiz);
+    }
+
+    private void imprimirArvoreRecursivo(NohArvore noh) {
+        if (noh != null) {
+            imprimirArvoreRecursivo(noh.getEsquerda());
+            System.out.println(noh.getConteudo()); 
+            imprimirArvoreRecursivo(noh.getDireita());
+        }
+    }
+
+
+     public void imprimirEmOrdem() {
+          long startTime = System.nanoTime();
+
+        imprimirEmOrdemRecursivo(raiz);
+
+        long endTime = System.nanoTime();
+        tempo_atual = endTime - startTime;
+    }
+
+    private void imprimirEmOrdemRecursivo(NohArvore noh) {
+        if (noh != null) {
+            imprimirEmOrdemRecursivo(noh.getEsquerda());
+            System.out.println(noh.getConteudo()); 
+            imprimirEmOrdemRecursivo(noh.getDireita());
+        }
+    }
     
 }
