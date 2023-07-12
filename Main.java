@@ -55,8 +55,18 @@ public class Main {
 
 
 
+  
 
-        /*TESTE COM LDE
+
+
+
+
+
+
+
+
+        
+        /*TESTE COM LDE  
          * 
          * 
          *  LDEOrdenada lista = new LDEOrdenada();
